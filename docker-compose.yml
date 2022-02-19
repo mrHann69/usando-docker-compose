@@ -1,0 +1,25 @@
+version: "3.3"
+services:
+  app:
+    image: nodeapp
+    restart: on-failure
+    #build: .
+    ports:
+      - "7000:8080"
+    volumes:
+      - .:/code
+    depends_on:
+        - db
+
+  db:
+    image: "postgres:latest"
+    restart: always
+    ports:
+      - "5454:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sampledb
+    volumes:
+      - ./src/database/db.sql:/docker-entrypoint-initdb.d/db.sql
+      - ./src/database/pgdata:/var/lib/postgresql/data

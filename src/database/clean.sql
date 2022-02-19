@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS sampledb;
+DROP ROLE IF EXISTS nodeapp;
